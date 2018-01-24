@@ -5,12 +5,25 @@
   "main": "index.js",
   "scripts": {
     "start": "debug=*,-node*, nodemon --exec \"electron .\"",
-    "test": "debug=*,-node*,-mocha* nodemon --exec \"mocha tests/**/*.js\""
+    "test": "debug=*,-node*,-mocha* nodemon --exec \"mocha tests/**/*.js\"",
+    "grunt": "grunt development"
+  },
+  "grunt": {
+    "css": "src/application/renderer/css",
+    "scss": "src/application/renderer/scss",
+    "js": "js",
+    "development": "dev",
+    "production": "build",
+    "bless": "min"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "electron": "^1.7.11",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^2.0.0",
     "jquery": "^3.3.1"
   }
 }

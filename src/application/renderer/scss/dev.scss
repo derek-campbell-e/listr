@@ -1,0 +1,137 @@
+@import "bootstrap/bootstrap";
+
+// colors 
+$blue: #5e85e3;
+$darker-blue: #2e343f;
+$darkest-blue: #191e28;
+
+
+@mixin transition {
+  -webkit-transition: all 250ms ease-in-out;
+  -moz-transition: all 250ms ease-in-out;
+  -ms-transition: all 250ms ease-in-out;
+  -o-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
+}
+
+body {
+  background-color: #191d27;
+  color: #fff;
+  font-family: 'Work Sans', sans-serif;
+  @include no-select();
+}
+
+
+.listr-sidebar {
+  @extend .col-3;
+  background-color: #2e3340;
+  max-width: 300px;
+  min-width: 200px;
+  height: 100vh;
+  overflow: auto;
+  padding: 21px;
+}
+
+.application-title {
+  font-weight: 700;
+  font-size: 24px;
+  small {
+    font-weight: 100;
+  }
+}
+
+.listr-lists {
+  @extend .list-group;
+  .item {
+    @extend .list-group-item;
+    background-color: rgba(255,255,255, 0.1);
+    border: 0px;
+    //border-radius: 0px!important;
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 12px;
+    cursor: pointer;
+
+    @include transition();
+
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+
+    i {
+      font-size: 24px;
+      line-height: 24px;
+      float: left;
+      margin-right: 12px;
+    }
+
+    .badge {
+      @extend .badge;
+      background-color: $blue;
+      float: right;
+      line-height: 24px;
+      font-size: 12px;
+      padding: 0;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    
+  }
+}
+
+.content-panel {
+  padding: 21px;
+}
+
+.list-todos {
+  h1 {
+    font-size: 24px;
+  }
+  margin-bottom: 21px;
+}
+
+.todo-table {
+  @extend .table;
+  td {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+.todo-checkbox, .todo-task p {
+  font-size: 24px;
+  line-height: 24px;
+  float: left;
+}
+
+.todo-checkbox-td {
+  width: 42px;
+}
+
+.todo-task div {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.todo-task h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.todo-task p {
+  font-size: 14px;
+}
+
+.todo-task p, h2 {
+  margin: 0;
+}

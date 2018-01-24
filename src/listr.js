@@ -17,9 +17,19 @@ module.exports = function Listr(){
     return Object.values(listr.lists);
   };
 
+  listr.listByID = function(listID){
+    let list = listr.lists[listID];
+    
+    if (!listr.lists.hasOwnProperty(listID) || typeof list === "undefined"){
+      return false;
+    }
+
+    return list;
+  };
+
   listr.createList = function(listName, category){
     let newList = require('./proto/list')(listName, category);
-    listr.lists[newList.meta.id] = newList;
+    listr.lists[newList.meta.listID] = newList;
     return newList;
   };
 

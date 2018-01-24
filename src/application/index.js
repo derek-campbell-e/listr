@@ -21,24 +21,48 @@ module.exports = function ListrApplication(Listr){
   application.mainWindow = null;
   application.indexPage = path.join(__dirname, 'renderer', 'index.html');
 
+  
+
   application.delegates = {};
+  application.delegates.onWindowLoad = function(){
+    let list = Listr.createList('Schoolwork', 'Education');
+    let kitchen = Listr.createList('Kitchen Chores', 'Home');
+    Listr.createList('Bedroom Chores', 'Home');
+    list.createTodo("OMG", "DEFAULT");
+    list.createTodo("Test 2", "DEFAULT");
+    list.createTodo("Another Task", "DEFAULT");
+    kitchen.createTodo("Wipe counters", "CLEANING");
+    kitchen.createTodo("Wash Dishes", "CLEANING");
+
+    console.log(Listr.showLists());
+  };
+
   application.delegates.onPageLoad = function(event, pageArg){
     switch(pageArg){
       case 'index':
-        let list = Listr.createList('AASchool', 'Education');
-        list.createTodo("OMG", "DEFAULT");
         event.sender.send('page-data', pageArg, Listr.showLists());
       break;
     }
   };
 
+  application.delegates.getListByID = function(event, listID){
+    
+    let list = Listr.listByID(listID);
+    console.log("GOT REQUEST", listID, list);
+    event.returnValue = list;
+    return event;
+  };
+
   ipcMain.on('page-load', application.delegates.onPageLoad);
+  ipcMain.on('get-list-by-id', application.delegates.getListByID);
+
 
   let mainWindow
   
   function createWindow () {
     // Create the browser window.
-    application.mainWindow = new BrowserWindow({width: 1000, height: 600, x: -1920 + 600, y: 300})
+    application.delegates.onWindowLoad();
+    application.mainWindow = new BrowserWindow({width: 1000, height: 600, x: 600, y: 300})
   
     // and load the index.html of the app.
     application.mainWindow.loadURL(url.format({

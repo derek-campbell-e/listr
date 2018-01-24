@@ -7,88 +7,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700|Work+Sans:300,400,500,600,700" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/dev.css">
 
     <title>Hello, world!</title>
+
     <style>
-      body {
-        background-color: #191d27;
-        color: #fff;
-        font-family: 'Work Sans', sans-serif;
-      }
-
-      .listr {
-        height: 100vh;
-      }
-
-      .listr-sidebar {
-        background-color: #2e3340;
-        max-width: 300px;
-        min-width: 200px;
-        padding: 21px;
-      }
-
-      .application-title {
-        font-weight: 700;
-        font-size: 24px;
-      }
-
-      .application-title small {
-        font-weight: 100;
-      }
-
-      .list-group-item {
-        background-color: rgba(255,255,255, 0.1);
-        border: 0px;
-        //border-radius: 0px!important;
-        margin-bottom: 0;
-        font-size: 16px;
-        line-height: 24px;
-        padding: 12px;
-      }
-
-      .list-group-item i {
-        font-size: 24px;
-        line-height: 24px;
-        float: left;
-        margin-right: 12px;
-      }
-
-      .list-group-item:hover {
-        background-color: rgba(0,0,0,0.1);
-      }
-
-      .list-group-item .badge {
-        float: right;
-        line-height: 24px;
-        font-size: 12px;
-        padding: 0;
-        padding-left: 6px;
-    padding-right: 6px;
-      }
-
+      
     </style>
   </head>
   <body>
 
     <div class='container-fluid'>
       <div class='row'>
-        <div class='col-3 listr listr-sidebar'>
+        <div class='listr-sidebar'>
           <h1 class='application-title'>LISTR<br><small>v0.0.1</small></h1>
           <div class='lists'>
-            <ul class="list-group listr-lists">
-              <li class="list-group-item"><i class="material-icons">school</i> Schoolwork</li>
-              <li class="list-group-item">Home</li>
-              <li class="list-group-item">Work</li>
-              <li class="list-group-item">Shopping</li>
+            <ul class="listr-lists" id="main-list">
+              <li class="item"><i class="material-icons">school</i> Schoolwork</li>
+              <li class="item">Home</li>
+              <li class="item">Work</li>
+              <li class="item">Shopping</li>
             </ul>
             <hr>
-            <ul class="list-group">
-              <li class="list-group-item"><i class="material-icons">add_circle_outline</i> Add A list</li>
+            <ul class="listr-lists">
+              <li class="item"><i class="material-icons">add_circle_outline</i> Add A list</li>
             </ul>
           </div>
         </div>
-        <div class='col'>
+        <div class='col content-panel' id='content-panel'>
 
         </div>
       </div>
