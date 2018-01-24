@@ -1,0 +1,11 @@
+{
+  "name": "listr",
+  "version": "1.0.0",
+  "description": "create lists, get reminded by date or recurring schedule",
+  "main": "index.js",
+  "scripts": {
+    "test": "debug=*,-node*,-mocha* nodemon --exec \"mocha tests/**/*.js\""
+  },
+  "author": "",
+  "license": "ISC"
+}
