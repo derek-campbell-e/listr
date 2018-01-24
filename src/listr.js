@@ -1,6 +1,7 @@
 module.exports = function Listr(){
   let listr = {};
   listr.storage = require('./common/storage')();
+  listr.application = require('./application')(listr);
   listr.lists = {};
 
   listr.deleteList = function(listID){
@@ -10,6 +11,10 @@ module.exports = function Listr(){
     }
     delete listr.lists[listID];
     return true;
+  };
+
+  listr.showLists = function(){
+    return Object.values(listr.lists);
   };
 
   listr.createList = function(listName, category){

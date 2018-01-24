@@ -1,1 +1,1 @@
-module.exports = require('./src/listr');
+module.exports = require('./src/listr')();

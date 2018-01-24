@@ -4,8 +4,13 @@
   "description": "create lists, get reminded by date or recurring schedule",
   "main": "index.js",
   "scripts": {
+    "start": "debug=*,-node*, nodemon --exec \"electron .\"",
     "test": "debug=*,-node*,-mocha* nodemon --exec \"mocha tests/**/*.js\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.11",
+    "jquery": "^3.3.1"
+  }
 }

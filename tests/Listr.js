@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Listr = require('../index')();
+const Listr = require('../index');
 
 describe("Listr", function(){
   
