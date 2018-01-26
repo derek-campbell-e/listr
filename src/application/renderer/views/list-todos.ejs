@@ -1,11 +1,10 @@
 <div class='list-todos'>
-  <h1><%- list.meta.name %></h1>
+  <h1><%- list.meta.name %> <a href='#' class='listr-button tiny add-todo' data-list-id='<%- list.meta.listID %>'>Add Todo</a></h1>
+  
   <table class='todo-table'>
     <%
-      
       for(let todoID in list.todos){
         let todo = list.todos[todoID];
-        console.log(todo);
     %>
     <tr>
       <td class='todo-checkbox-td'>
@@ -13,8 +12,7 @@
         </td>
       <td class="todo-task">
         <div>
-          <h2>FROM VIEW:<%- todo.task %></h2>
-          <p><%- todo.meta.category %></p>
+          <h2><%- todo.task %></h2>
         </div>
       </td>
     </tr>

@@ -135,3 +135,41 @@ body {
 .todo-task p, h2 {
   margin: 0;
 }
+
+.listr-button {
+  @extend .btn;
+  background-color: $blue;
+  color: #fff;
+  &:hover, &:focus {
+    background-color: darken($blue, 10%);
+    color: #fff;
+  }
+  &.tiny {
+    @extend .btn-sm;
+  }
+}
+
+.add-todo-input {
+  @extend .form-control;
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  padding: 0;
+  font-weight: 700;
+  
+  &:focus, &:hover {
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+tr.todo-insert {
+  td {
+    background-color: rgba(255,255,255, 0.05);
+  }
+}

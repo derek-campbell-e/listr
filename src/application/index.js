@@ -62,7 +62,7 @@ module.exports = function ListrApplication(Listr){
   function createWindow () {
     // Create the browser window.
     application.delegates.onWindowLoad();
-    application.mainWindow = new BrowserWindow({width: 1000, height: 600, x: 600, y: 300})
+    application.mainWindow = new BrowserWindow({width: 1000, height: 600, x: -1200, y: 300})
   
     // and load the index.html of the app.
     application.mainWindow.loadURL(url.format({
