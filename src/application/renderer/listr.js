@@ -1,6 +1,8 @@
 module.exports = function ListrRenderer(){
   window.$ = window.jQuery = require('jquery');
   const {ipcRenderer} = require('electron');
+  let renderer = require('./renderer')();
+
   let listr = {};
 
   listr.delegates = {};
@@ -15,30 +17,11 @@ module.exports = function ListrRenderer(){
   listr.render = {};
   
   listr.render.todo = function(todo){
-    let html = "";
-    html += "<td class='todo-checkbox-td'>" + '<i class="material-icons todo-checkbox">check_box_outline_blank</i>' + "</td>";
-    html += "<td class='todo-task'><div><h2>" + todo.task + "</h2><p>"+todo.meta.category+"</p></div></td>";
-    return html;
+    return renderer.render('todo-each', {todo: todo});
   };
 
   listr.render.todosPerList = function(list){
-    let html = "<div class='list-todos'>";
-    html += "<h1>"+list.meta.name+"</h1>";
-    
-    if (!listr.hasTodos(list)) {
-      html += "Add a todo!";
-      html += "</div>";
-      return html;
-    }
-
-    html += "<table class='todo-table'>";
-    for(let todoID in list.todos){
-      let todo = list.todos[todoID];
-      html += "<tr>" + listr.render.todo(todo) + "</tr>";
-    }
-    html += "</table>";
-    html += "</div>";
-    return html;
+    return renderer.render('list-todos', {list: list});
   };
 
   listr.render.showListTodosInContentPanel = function(list){

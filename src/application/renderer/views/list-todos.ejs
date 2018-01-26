@@ -1,0 +1,25 @@
+<div class='list-todos'>
+  <h1><%- list.meta.name %></h1>
+  <table class='todo-table'>
+    <%
+      
+      for(let todoID in list.todos){
+        let todo = list.todos[todoID];
+        console.log(todo);
+    %>
+    <tr>
+      <td class='todo-checkbox-td'>
+          <i class="material-icons todo-checkbox">check_box_outline_blank</i>
+        </td>
+      <td class="todo-task">
+        <div>
+          <h2>FROM VIEW:<%- todo.task %></h2>
+          <p><%- todo.meta.category %></p>
+        </div>
+      </td>
+    </tr>
+    <%
+      }
+    %>
+  </table>
+</div>

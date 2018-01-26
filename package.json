@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.5.7",
     "electron": "^1.7.11",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
