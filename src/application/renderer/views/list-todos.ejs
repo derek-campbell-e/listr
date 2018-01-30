@@ -1,27 +1,30 @@
-<div class='list-todos'>
+<div class='header'>
   <h1><%- list.meta.name %> <a href='#' class='listr-button tiny add-todo' data-list-id='<%- list.meta.listID %>'>Add Todo</a></h1>
-  
-  <table class='todo-table'>
-    <%
-      for(let todoID in list.todos){
-        let todo = list.todos[todoID];
-    %>
-    <tr>
-      
-      <td class='todo-checkbox-td'>
-          <i class="material-icons todo-checkbox">check_box_outline_blank</i>
+</div>
+<div class='content'>
+  <div class='list-todos'>
+    <table class='todo-table'>
+      <%
+        for(let todoID in list.todos){
+          let todo = list.todos[todoID];
+      %>
+      <tr>
+        
+        <td class='todo-checkbox-td'>
+            <i class="material-icons todo-checkbox">check_box_outline_blank</i>
+          </td>
+        <td class="todo-task" id='<%- todo.meta.id %>'>
+          <div>
+            <input type='text' class='todo-input' value='<%- todo.task %>'>
+          </div>
         </td>
-      <td class="todo-task" id='<%- todo.meta.id %>'>
-        <div>
-          <input type='text' class='todo-input' value='<%- todo.task %>'>
-        </div>
-      </td>
-      <td class='todo-drag-td'>
-        <i class="material-icons todo-drag">drag_handle</i>
-      </td>
-    </tr>
-    <%
-      }
-    %>
-  </table>
-</div> 
+        <td class='todo-drag-td'>
+          <i class="material-icons todo-drag">drag_handle</i>
+        </td>
+      </tr>
+      <%
+        }
+      %>
+    </table>
+  </div> 
+</div>

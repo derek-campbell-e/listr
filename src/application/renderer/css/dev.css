@@ -6148,12 +6148,17 @@ body {
 
 .content-panel {
   padding: 21px;
-  height: 100vh;
-  overflow: auto; }
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh; }
+  .content-panel .content {
+    flex: 1;
+    max-height: 100%;
+    overflow: auto; }
 
-.list-todos {
+.list-todos, .header {
   margin-bottom: 21px; }
-  .list-todos h1 {
+  .list-todos h1, .header h1 {
     font-size: 24px; }
 
 .todo-table td {
@@ -6208,3 +6213,15 @@ body {
 
 tr.todo-insert td {
   background-color: rgba(255, 255, 255, 0.05); }
+
+::-webkit-scrollbar {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 6px;
+  border-radius: 200px;
+  margin-left: 12px; }
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 200px;
+  padding: 12px; }
