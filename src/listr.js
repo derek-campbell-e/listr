@@ -17,6 +17,31 @@ module.exports = function Listr(){
     return Object.values(listr.lists);
   };
 
+  listr.addTodo = function(listID, todoText, cb){
+    cb = cb || function(){};
+    let list = listr.listByID(listID);
+    if (list){
+      list.createTodo(todoText);
+      cb();
+      return true;
+    }
+    return false;
+  };
+
+  listr.updateTodo = function(listID, todoID, todoText, cb){
+    cb = cb || function(){};
+    let list = listr.listByID(listID);
+    let todo = list.todoByID(todoID);
+    if(list && todo){
+      todo.task = todoText;
+      console.log("UPDATED");
+      cb();
+      return true;
+    }
+    console.log(arguments);
+    return false;
+  };
+
   listr.listByID = function(listID){
     let list = listr.lists[listID];
     

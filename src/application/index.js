@@ -53,8 +53,25 @@ module.exports = function ListrApplication(Listr){
     return event;
   };
 
+  application.delegates.addTodo = function(event, listID, todoText){
+    let callback = function(){
+      event.sender.send('refresh-list', listID, Listr.showLists());
+    };
+    return Listr.addTodo(listID, todoText, callback);
+  };
+
+  application.delegates.updateTodo = function(event, listID, todoID, todoText){
+    console.log(arguments);
+    let callback = function(){
+      event.sender.send('refresh-list', listID, Listr.showLists());
+    };
+    return Listr.updateTodo(listID, todoID, todoText, callback);
+  };
+
   ipcMain.on('page-load', application.delegates.onPageLoad);
   ipcMain.on('get-list-by-id', application.delegates.getListByID);
+  ipcMain.on('add-todo', application.delegates.addTodo);
+  ipcMain.on('update-todo', application.delegates.updateTodo);
 
 
   let mainWindow

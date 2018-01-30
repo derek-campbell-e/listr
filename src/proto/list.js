@@ -13,6 +13,14 @@ module.exports = function List(listName, category, listFile){
 
   list.todos = {};
 
+  list.todoByID = function(todoID){
+    let todo = list.todos[todoID];
+    if(!todo){
+      return false;
+    }
+    return todo;
+  };
+
   list.createTodo = function(task, category, timing){
     let newTodo = new todo();
     newTodo.addTask(task, category);

@@ -92,6 +92,8 @@ body {
 
 .content-panel {
   padding: 21px;
+  height: 100vh;
+  overflow: auto;
 }
 
 .list-todos {
@@ -108,13 +110,17 @@ body {
   }
 }
 
-.todo-checkbox, .todo-task p {
+.todo-checkbox, .todo-task p, .todo-drag {
   font-size: 24px;
   line-height: 24px;
   float: left;
 }
 
-.todo-checkbox-td {
+.todo-checkbox, .todo-drag {
+  cursor: pointer;
+}
+
+.todo-checkbox-td, .todo-drag-td {
   width: 42px;
 }
 
@@ -149,7 +155,7 @@ body {
   }
 }
 
-.add-todo-input {
+.add-todo-input, .todo-input {
   @extend .form-control;
   background-color: transparent;
   color: #fff;

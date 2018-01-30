@@ -48,12 +48,13 @@ module.exports = function ListrRenderer(){
     if(e.which !== 13){
       return true;
     }
-    alert(listr.current.list);
-    $(document).off('keydown', '.add-todo-list');
+    let todoText = $(this).val();
+    ipcRenderer.send('add-todo', listr.current.list, todoText);
+    $(document).off('keydown', '.add-todo-input');
   };
 
-  listr.delegates.onClickListInSidebar = function(){
-    let listID = $(this).attr('id');
+  listr.delegates.onClickListInSidebar = function(event, manualListID){
+    let listID = $(this).attr('id') || manualListID;
     let list = ipcRenderer.sendSync('get-list-by-id', listID);
     if(list){
       listr.render.showListTodosInContentPanel(list);
@@ -81,10 +82,35 @@ module.exports = function ListrRenderer(){
     }
   };
 
+  listr.delegates.onEnterTodoUpdate = function(event){
+   
+    if(event.which !== 13){
+      return true;
+    }
+
+    let todoID = $(this).closest(".todo-task").attr('id');
+    let todoText = $(this).val();
+    ipcRenderer.send('update-todo', listr.current.list, todoID, todoText);
+  };
+
+  listr.delegates.updateListrDashboard = function(event, updatedListID, allLists){
+    let dom = $("#main-list");
+    let html = "";
+    for(let index in allLists){
+      let list = allLists[index];
+      let numberOfTodos = Object.keys(list.todos).length;
+      let listDom = $("#"+list.meta.listID);
+      listDom.find(".badge").text(numberOfTodos);
+    }
+    listr.delegates.onClickListInSidebar(event, updatedListID);
+  };
+
   listr.bind = function(){
     ipcRenderer.on('page-data', listr.delegates.onPageData);
+    ipcRenderer.on('refresh-list', listr.delegates.updateListrDashboard);
     $(document).on('click', '#main-list .item', listr.delegates.onClickListInSidebar);
     $(document).on('click', '.add-todo', listr.delegates.onClickAddTodo);
+    $(document).on('keydown', '.todo-input', listr.delegates.onEnterTodoUpdate);
   };
 
   let init = function(){

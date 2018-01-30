@@ -1247,7 +1247,7 @@ pre {
   .table-responsive > .table-bordered {
     border: 0; }
 
-.form-control, .add-todo-input {
+.form-control, .add-todo-input, .todo-input {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -1259,26 +1259,26 @@ pre {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
-  .form-control::-ms-expand, .add-todo-input::-ms-expand {
+  .form-control::-ms-expand, .add-todo-input::-ms-expand, .todo-input::-ms-expand {
     background-color: transparent;
     border: 0; }
-  .form-control:focus, .add-todo-input:focus {
+  .form-control:focus, .add-todo-input:focus, .todo-input:focus {
     color: #495057;
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
-  .form-control::placeholder, .add-todo-input::placeholder {
+  .form-control::placeholder, .add-todo-input::placeholder, .todo-input::placeholder {
     color: #6c757d;
     opacity: 1; }
-  .form-control:disabled, .add-todo-input:disabled, .form-control[readonly], [readonly].add-todo-input {
+  .form-control:disabled, .add-todo-input:disabled, .todo-input:disabled, .form-control[readonly], [readonly].add-todo-input, [readonly].todo-input {
     background-color: #e9ecef;
     opacity: 1; }
 
-select.form-control:not([size]):not([multiple]), select.add-todo-input:not([size]):not([multiple]) {
+select.form-control:not([size]):not([multiple]), select.add-todo-input:not([size]):not([multiple]), select.todo-input:not([size]):not([multiple]) {
   height: calc(2.25rem + 2px); }
 
-select.form-control:focus::-ms-value, select.add-todo-input:focus::-ms-value {
+select.form-control:focus::-ms-value, select.add-todo-input:focus::-ms-value, select.todo-input:focus::-ms-value {
   color: #495057;
   background-color: #fff; }
 
@@ -1316,13 +1316,13 @@ select.form-control:focus::-ms-value, select.add-todo-input:focus::-ms-value {
   background-color: transparent;
   border: solid transparent;
   border-width: 1px 0; }
-  .form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control, .input-group-sm > .form-control-plaintext.add-todo-input,
+  .form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control, .input-group-sm > .form-control-plaintext.add-todo-input, .input-group-sm > .form-control-plaintext.todo-input,
   .input-group-sm > .input-group-prepend > .form-control-plaintext.input-group-text,
   .input-group-sm > .input-group-append > .form-control-plaintext.input-group-text,
   .input-group-sm > .input-group-prepend > .form-control-plaintext.btn,
   .input-group-sm > .input-group-prepend > .form-control-plaintext.listr-button,
   .input-group-sm > .input-group-append > .form-control-plaintext.btn,
-  .input-group-sm > .input-group-append > .form-control-plaintext.listr-button, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control, .input-group-lg > .form-control-plaintext.add-todo-input,
+  .input-group-sm > .input-group-append > .form-control-plaintext.listr-button, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control, .input-group-lg > .form-control-plaintext.add-todo-input, .input-group-lg > .form-control-plaintext.todo-input,
   .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,
   .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,
   .input-group-lg > .input-group-prepend > .form-control-plaintext.btn,
@@ -1332,7 +1332,7 @@ select.form-control:focus::-ms-value, select.add-todo-input:focus::-ms-value {
     padding-right: 0;
     padding-left: 0; }
 
-.form-control-sm, .input-group-sm > .form-control, .input-group-sm > .add-todo-input,
+.form-control-sm, .input-group-sm > .form-control, .input-group-sm > .add-todo-input, .input-group-sm > .todo-input,
 .input-group-sm > .input-group-prepend > .input-group-text,
 .input-group-sm > .input-group-append > .input-group-text,
 .input-group-sm > .input-group-prepend > .btn,
@@ -1344,7 +1344,7 @@ select.form-control:focus::-ms-value, select.add-todo-input:focus::-ms-value {
   line-height: 1.5;
   border-radius: 0.2rem; }
 
-select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]), .input-group-sm > select.add-todo-input:not([size]):not([multiple]),
+select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]), .input-group-sm > select.add-todo-input:not([size]):not([multiple]), .input-group-sm > select.todo-input:not([size]):not([multiple]),
 .input-group-sm > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
 .input-group-sm > .input-group-append > select.input-group-text:not([size]):not([multiple]),
 .input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),
@@ -1353,7 +1353,7 @@ select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.for
 .input-group-sm > .input-group-append > select.listr-button:not([size]):not([multiple]) {
   height: calc(1.8125rem + 2px); }
 
-.form-control-lg, .input-group-lg > .form-control, .input-group-lg > .add-todo-input,
+.form-control-lg, .input-group-lg > .form-control, .input-group-lg > .add-todo-input, .input-group-lg > .todo-input,
 .input-group-lg > .input-group-prepend > .input-group-text,
 .input-group-lg > .input-group-append > .input-group-text,
 .input-group-lg > .input-group-prepend > .btn,
@@ -1365,7 +1365,7 @@ select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.for
   line-height: 1.5;
   border-radius: 0.3rem; }
 
-select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]), .input-group-lg > select.add-todo-input:not([size]):not([multiple]),
+select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]), .input-group-lg > select.add-todo-input:not([size]):not([multiple]), .input-group-lg > select.todo-input:not([size]):not([multiple]),
 .input-group-lg > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
 .input-group-lg > .input-group-append > select.input-group-text:not([size]):not([multiple]),
 .input-group-lg > .input-group-prepend > select.btn:not([size]):not([multiple]),
@@ -1438,19 +1438,20 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   background-color: rgba(40, 167, 69, 0.8);
   border-radius: .2rem; }
 
-.was-validated .form-control:valid, .was-validated .add-todo-input:valid, .form-control.is-valid, .is-valid.add-todo-input, .was-validated
+.was-validated .form-control:valid, .was-validated .add-todo-input:valid, .was-validated .todo-input:valid, .form-control.is-valid, .is-valid.add-todo-input, .is-valid.todo-input, .was-validated
 .custom-select:valid,
 .custom-select.is-valid {
   border-color: #28a745; }
-  .was-validated .form-control:valid:focus, .was-validated .add-todo-input:valid:focus, .form-control.is-valid:focus, .is-valid.add-todo-input:focus, .was-validated
+  .was-validated .form-control:valid:focus, .was-validated .add-todo-input:valid:focus, .was-validated .todo-input:valid:focus, .form-control.is-valid:focus, .is-valid.add-todo-input:focus, .is-valid.todo-input:focus, .was-validated
   .custom-select:valid:focus,
   .custom-select.is-valid:focus {
     border-color: #28a745;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }
-  .was-validated .form-control:valid ~ .valid-feedback, .was-validated .add-todo-input:valid ~ .valid-feedback,
+  .was-validated .form-control:valid ~ .valid-feedback, .was-validated .add-todo-input:valid ~ .valid-feedback, .was-validated .todo-input:valid ~ .valid-feedback,
   .was-validated .form-control:valid ~ .valid-tooltip,
-  .was-validated .add-todo-input:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback, .is-valid.add-todo-input ~ .valid-feedback,
-  .form-control.is-valid ~ .valid-tooltip, .is-valid.add-todo-input ~ .valid-tooltip, .was-validated
+  .was-validated .add-todo-input:valid ~ .valid-tooltip,
+  .was-validated .todo-input:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback, .is-valid.add-todo-input ~ .valid-feedback, .is-valid.todo-input ~ .valid-feedback,
+  .form-control.is-valid ~ .valid-tooltip, .is-valid.add-todo-input ~ .valid-tooltip, .is-valid.todo-input ~ .valid-tooltip, .was-validated
   .custom-select:valid ~ .valid-feedback,
   .was-validated
   .custom-select:valid ~ .valid-tooltip,
@@ -1516,19 +1517,20 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   background-color: rgba(220, 53, 69, 0.8);
   border-radius: .2rem; }
 
-.was-validated .form-control:invalid, .was-validated .add-todo-input:invalid, .form-control.is-invalid, .is-invalid.add-todo-input, .was-validated
+.was-validated .form-control:invalid, .was-validated .add-todo-input:invalid, .was-validated .todo-input:invalid, .form-control.is-invalid, .is-invalid.add-todo-input, .is-invalid.todo-input, .was-validated
 .custom-select:invalid,
 .custom-select.is-invalid {
   border-color: #dc3545; }
-  .was-validated .form-control:invalid:focus, .was-validated .add-todo-input:invalid:focus, .form-control.is-invalid:focus, .is-invalid.add-todo-input:focus, .was-validated
+  .was-validated .form-control:invalid:focus, .was-validated .add-todo-input:invalid:focus, .was-validated .todo-input:invalid:focus, .form-control.is-invalid:focus, .is-invalid.add-todo-input:focus, .is-invalid.todo-input:focus, .was-validated
   .custom-select:invalid:focus,
   .custom-select.is-invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }
-  .was-validated .form-control:invalid ~ .invalid-feedback, .was-validated .add-todo-input:invalid ~ .invalid-feedback,
+  .was-validated .form-control:invalid ~ .invalid-feedback, .was-validated .add-todo-input:invalid ~ .invalid-feedback, .was-validated .todo-input:invalid ~ .invalid-feedback,
   .was-validated .form-control:invalid ~ .invalid-tooltip,
-  .was-validated .add-todo-input:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback, .is-invalid.add-todo-input ~ .invalid-feedback,
-  .form-control.is-invalid ~ .invalid-tooltip, .is-invalid.add-todo-input ~ .invalid-tooltip, .was-validated
+  .was-validated .add-todo-input:invalid ~ .invalid-tooltip,
+  .was-validated .todo-input:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback, .is-invalid.add-todo-input ~ .invalid-feedback, .is-invalid.todo-input ~ .invalid-feedback,
+  .form-control.is-invalid ~ .invalid-tooltip, .is-invalid.add-todo-input ~ .invalid-tooltip, .is-invalid.todo-input ~ .invalid-tooltip, .was-validated
   .custom-select:invalid ~ .invalid-feedback,
   .was-validated
   .custom-select:invalid ~ .invalid-tooltip,
@@ -1591,7 +1593,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
       flex-flow: row wrap;
       align-items: center;
       margin-bottom: 0; }
-    .form-inline .form-control, .form-inline .add-todo-input {
+    .form-inline .form-control, .form-inline .add-todo-input, .form-inline .todo-input {
       display: inline-block;
       width: auto;
       vertical-align: middle; }
@@ -2348,36 +2350,40 @@ tbody.collapse.show {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%; }
-  .input-group > .form-control, .input-group > .add-todo-input,
+  .input-group > .form-control, .input-group > .add-todo-input, .input-group > .todo-input,
   .input-group > .custom-select,
   .input-group > .custom-file {
     position: relative;
     flex: 1 1 auto;
     width: 1%;
     margin-bottom: 0; }
-    .input-group > .form-control:focus, .input-group > .add-todo-input:focus,
+    .input-group > .form-control:focus, .input-group > .add-todo-input:focus, .input-group > .todo-input:focus,
     .input-group > .custom-select:focus,
     .input-group > .custom-file:focus {
       z-index: 3; }
-    .input-group > .form-control + .form-control, .input-group > .add-todo-input + .form-control, .input-group > .form-control + .add-todo-input, .input-group > .add-todo-input + .add-todo-input,
+    .input-group > .form-control + .form-control, .input-group > .add-todo-input + .form-control, .input-group > .todo-input + .form-control, .input-group > .form-control + .add-todo-input, .input-group > .add-todo-input + .add-todo-input, .input-group > .todo-input + .add-todo-input, .input-group > .form-control + .todo-input, .input-group > .add-todo-input + .todo-input, .input-group > .todo-input + .todo-input,
     .input-group > .form-control + .custom-select,
     .input-group > .add-todo-input + .custom-select,
+    .input-group > .todo-input + .custom-select,
     .input-group > .form-control + .custom-file,
     .input-group > .add-todo-input + .custom-file,
+    .input-group > .todo-input + .custom-file,
     .input-group > .custom-select + .form-control,
     .input-group > .custom-select + .add-todo-input,
+    .input-group > .custom-select + .todo-input,
     .input-group > .custom-select + .custom-select,
     .input-group > .custom-select + .custom-file,
     .input-group > .custom-file + .form-control,
     .input-group > .custom-file + .add-todo-input,
+    .input-group > .custom-file + .todo-input,
     .input-group > .custom-file + .custom-select,
     .input-group > .custom-file + .custom-file {
       margin-left: -1px; }
-  .input-group > .form-control:not(:last-child), .input-group > .add-todo-input:not(:last-child),
+  .input-group > .form-control:not(:last-child), .input-group > .add-todo-input:not(:last-child), .input-group > .todo-input:not(:last-child),
   .input-group > .custom-select:not(:last-child) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
-  .input-group > .form-control:not(:first-child), .input-group > .add-todo-input:not(:first-child),
+  .input-group > .form-control:not(:first-child), .input-group > .add-todo-input:not(:first-child), .input-group > .todo-input:not(:first-child),
   .input-group > .custom-select:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; }
@@ -6141,7 +6147,9 @@ body {
     padding-right: 6px; }
 
 .content-panel {
-  padding: 21px; }
+  padding: 21px;
+  height: 100vh;
+  overflow: auto; }
 
 .list-todos {
   margin-bottom: 21px; }
@@ -6151,12 +6159,15 @@ body {
 .todo-table td {
   border-top: 1px solid rgba(255, 255, 255, 0.06); }
 
-.todo-checkbox, .todo-task p {
+.todo-checkbox, .todo-task p, .todo-drag {
   font-size: 24px;
   line-height: 24px;
   float: left; }
 
-.todo-checkbox-td {
+.todo-checkbox, .todo-drag {
+  cursor: pointer; }
+
+.todo-checkbox-td, .todo-drag-td {
   width: 42px; }
 
 .todo-task div {
@@ -6180,7 +6191,7 @@ body {
     background-color: #3364db;
     color: #fff; }
 
-.add-todo-input {
+.add-todo-input, .todo-input {
   background-color: transparent;
   color: #fff;
   border: 0;
@@ -6188,7 +6199,7 @@ body {
   box-shadow: none;
   padding: 0;
   font-weight: 700; }
-  .add-todo-input:focus, .add-todo-input:hover {
+  .add-todo-input:focus, .add-todo-input:hover, .todo-input:focus, .todo-input:hover {
     background-color: transparent;
     color: #fff;
     border: 0;
