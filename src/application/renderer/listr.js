@@ -7,6 +7,12 @@ module.exports = function ListrRenderer(){
 
   listr.current = {};
   listr.current.list = null;
+  listr.current.listObject = {};
+
+  listr.helpers = {};
+  listr.helpers.todoID = function(){
+    return $(this).closest("tr").attr('data-row-id');
+  };
 
   listr.delegates = {};
   listr.delegates.onPageLoad = function(){
@@ -49,7 +55,7 @@ module.exports = function ListrRenderer(){
       return true;
     }
     let todoText = $(this).val();
-    ipcRenderer.send('add-todo', listr.current.list, todoText);
+    ipcRenderer.send('add-todo', listr.current.list.meta.listID, todoText);
     $(document).off('keydown', '.add-todo-input');
   };
 
@@ -58,7 +64,7 @@ module.exports = function ListrRenderer(){
     let list = ipcRenderer.sendSync('get-list-by-id', listID);
     if(list){
       listr.render.showListTodosInContentPanel(list);
-      listr.current.list = listID;
+      listr.current.list = list;
     }
   };
 
@@ -67,6 +73,7 @@ module.exports = function ListrRenderer(){
       case 'index':
         // load up all the lists into the view
         console.log(data);
+        listr.current.listrLists = data;
         let dom = $("#main-list");
         let html = "";
         for(let index in data){
@@ -76,7 +83,7 @@ module.exports = function ListrRenderer(){
         }
         let firstList = data[0];
         listr.render.showListTodosInContentPanel(firstList);
-        listr.current.list = firstList.meta.listID;
+        listr.current.list = firstList;
         dom.html(html);
       break;
     }
@@ -90,19 +97,30 @@ module.exports = function ListrRenderer(){
 
     let todoID = $(this).closest(".todo-task").attr('id');
     let todoText = $(this).val();
-    ipcRenderer.send('update-todo', listr.current.list, todoID, todoText);
+    ipcRenderer.send('update-todo', listr.current.list.meta.listID, todoID, todoText);
+  };
+
+  listr.delegates.onClickCompleteTodo = function(event){
+    let todoID = listr.helpers.todoID.call(this);
+    console.log(listr.current.list);
+    let todoStatus = listr.current.list.todos[todoID].meta.isComplete;
+    console.log(todoStatus, "BEFORE REVERSE");
+    todoStatus = !todoStatus;
+    console.log(todoID, todoStatus);
+    ipcRenderer.send('complete-todo', listr.current.list.meta.listID, todoID, todoStatus);
   };
 
   listr.delegates.updateListrDashboard = function(event, updatedListID, allLists){
     let dom = $("#main-list");
     let html = "";
+    listr.current.listrLists = allLists;
     for(let index in allLists){
       let list = allLists[index];
       let numberOfTodos = Object.keys(list.todos).length;
       let listDom = $("#"+list.meta.listID);
       listDom.find(".badge").text(numberOfTodos);
     }
-    listr.delegates.onClickListInSidebar(event, updatedListID);
+    listr.delegates.onClickListInSidebar(event, updatedListID, allLists);
   };
 
   listr.bind = function(){
@@ -111,6 +129,7 @@ module.exports = function ListrRenderer(){
     $(document).on('click', '#main-list .item', listr.delegates.onClickListInSidebar);
     $(document).on('click', '.add-todo', listr.delegates.onClickAddTodo);
     $(document).on('keydown', '.todo-input', listr.delegates.onEnterTodoUpdate);
+    $(document).on('click', '.todo-checkbox-td i', listr.delegates.onClickCompleteTodo);
   };
 
   let init = function(){

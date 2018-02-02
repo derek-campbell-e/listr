@@ -1,3 +1,14 @@
+<%
+  let checkmarkText = function(status){
+    console.log("CURRENT STATUS", status);
+    status = status || false;
+    let text = "check_box_outline_blank";
+    if(status){
+      text = "check_box";
+    }
+    return text;
+  };
+%>
 <div class='header'>
   <h1><%- list.meta.name %> <a href='#' class='listr-button tiny add-todo' data-list-id='<%- list.meta.listID %>'>Add Todo</a></h1>
 </div>
@@ -8,10 +19,10 @@
         for(let todoID in list.todos){
           let todo = list.todos[todoID];
       %>
-      <tr>
+      <tr data-row-id='<%- todo.meta.id %>'>
         
         <td class='todo-checkbox-td'>
-            <i class="material-icons todo-checkbox">check_box_outline_blank</i>
+            <i class="material-icons todo-checkbox"><%- checkmarkText(todo.meta.isComplete) %></i>
           </td>
         <td class="todo-task" id='<%- todo.meta.id %>'>
           <div>

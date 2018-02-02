@@ -38,7 +38,17 @@ module.exports = function Listr(){
       cb();
       return true;
     }
-    console.log(arguments);
+    return false;
+  };
+
+  listr.completeTodo = function(listID, todoID, completed, cb){
+    cb = cb || function(){};
+    let list = listr.listByID(listID);
+    let todo = list.todoByID(todoID);
+    if (list && todo){
+      todo.completeTask(completed);
+      return cb();
+    }
     return false;
   };
 

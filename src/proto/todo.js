@@ -5,8 +5,8 @@ module.exports = function Todo(){
 
   todo.task = null;
 
-  todo.completeTask = function(){
-    todo.meta.isComplete = true;
+  todo.completeTask = function(completed){
+    todo.meta.isComplete = completed;
     return true;
   };
   

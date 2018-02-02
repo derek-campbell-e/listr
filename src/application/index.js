@@ -46,9 +46,8 @@ module.exports = function ListrApplication(Listr){
   };
 
   application.delegates.getListByID = function(event, listID){
-    
     let list = Listr.listByID(listID);
-    console.log("GOT REQUEST", listID, list);
+    //console.log("GOT REQUEST", listID, list);
     event.returnValue = list;
     return event;
   };
@@ -61,17 +60,29 @@ module.exports = function ListrApplication(Listr){
   };
 
   application.delegates.updateTodo = function(event, listID, todoID, todoText){
-    console.log(arguments);
     let callback = function(){
       event.sender.send('refresh-list', listID, Listr.showLists());
     };
     return Listr.updateTodo(listID, todoID, todoText, callback);
   };
 
+  application.delegates.completeTodo = function(event, listID, todoID, completed){
+    //console.log("COMPLETIN");
+    if(typeof completed === "undefined"){
+      completed = true;
+    }
+
+    let callback = function(){
+      event.sender.send('refresh-list', listID, Listr.showLists());
+    };
+    return Listr.completeTodo(listID, todoID, completed, callback);
+  };
+
   ipcMain.on('page-load', application.delegates.onPageLoad);
   ipcMain.on('get-list-by-id', application.delegates.getListByID);
   ipcMain.on('add-todo', application.delegates.addTodo);
   ipcMain.on('update-todo', application.delegates.updateTodo);
+  ipcMain.on('complete-todo', application.delegates.completeTodo);
 
 
   let mainWindow
