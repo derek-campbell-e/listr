@@ -71,8 +71,9 @@ module.exports = function ListrApplication(Listr){
     }
 
     let callback = function(){
-      event.sender.send('refresh-list', listID, Listr.showLists());
+      event.sender.send('refresh-list-soft', listID, Listr.showLists(), todoID, completed);
     };
+    
     return Listr.completeTodo(listID, todoID, completed, callback);
   };
 

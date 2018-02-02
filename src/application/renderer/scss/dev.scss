@@ -69,6 +69,21 @@ body {
       background-color: rgba(0,0,0,0.1);
     }
 
+
+    &.active {
+      background-color: $blue;
+      &:hover {
+        background-color: darken($blue, 5%);
+      }
+      .badge {
+
+        background-color: #fff;
+        color: $blue;
+      }
+    }
+
+    
+
     i {
       font-size: 24px;
       line-height: 24px;
@@ -78,6 +93,7 @@ body {
 
     .badge {
       @extend .badge;
+      @include transition();
       background-color: $blue;
       float: right;
       line-height: 24px;
@@ -115,6 +131,16 @@ body {
   @extend .table;
   td {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .todo-complete-true, .todo-complete-false {
+    td > * {
+      @include transition();
+    }
+  }
+  .todo-complete-true {
+    td > * {
+      opacity: 0.1;
+    }
   }
 }
 

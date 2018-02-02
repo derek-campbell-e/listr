@@ -14,6 +14,15 @@ module.exports = function ListrRenderer(){
     return $(this).closest("tr").attr('data-row-id');
   };
 
+  listr.helpers.checkmarkText = function(status){
+    status = status || false;
+    let text = "check_box_outline_blank";
+    if(status){
+      text = "check_box";
+    }
+    return text;
+  };
+
   listr.delegates = {};
   listr.delegates.onPageLoad = function(){
 
@@ -37,9 +46,21 @@ module.exports = function ListrRenderer(){
     return renderer.render('list-todos', {list: list});
   };
 
+  listr.render.completeTodoTask = function(todoID, completed){
+    let dom = $("[data-row-id="+todoID+"]");
+    dom.find(".todo-checkbox").text(listr.helpers.checkmarkText(completed));
+    if(completed){
+      dom.removeClass('todo-complete-false').addClass('todo-complete-true');
+    } else {
+      dom.removeClass('todo-complete-true').addClass('todo-complete-false');
+    }
+    
+  };
+
   listr.render.showListTodosInContentPanel = function(list){
     let contentPanel = $("#content-panel");
     let listTodosHTML = listr.render.todosPerList(list);
+
     contentPanel.html(listTodosHTML);
   };
   
@@ -65,6 +86,9 @@ module.exports = function ListrRenderer(){
     if(list){
       listr.render.showListTodosInContentPanel(list);
       listr.current.list = list;
+      console.log("HAVE THE LIST");
+      $("#main-list").find(".active").removeClass('active');
+      $("[data-list-id="+listr.current.list.meta.listID+"]").addClass('active');
     }
   };
 
@@ -79,12 +103,14 @@ module.exports = function ListrRenderer(){
         for(let index in data){
           let list = data[index];
           let numberOfTodos = Object.keys(list.todos).length;
-          html += "<li class='item' id='"+list.meta.listID+"'>"+list.meta.name+"<span class='badge badge-primary'>"+numberOfTodos+"</span></li>"
+          html += "<li class='item' id='"+list.meta.listID+"' data-list-id='"+list.meta.listID+"'>"+list.meta.name+"<span class='badge badge-primary'>"+numberOfTodos+"</span></li>"
         }
         let firstList = data[0];
-        listr.render.showListTodosInContentPanel(firstList);
+        //listr.render.showListTodosInContentPanel(firstList);
         listr.current.list = firstList;
         dom.html(html);
+        listr.delegates.onClickListInSidebar(null, firstList.meta.listID);
+        
       break;
     }
   };
@@ -102,11 +128,8 @@ module.exports = function ListrRenderer(){
 
   listr.delegates.onClickCompleteTodo = function(event){
     let todoID = listr.helpers.todoID.call(this);
-    console.log(listr.current.list);
-    let todoStatus = listr.current.list.todos[todoID].meta.isComplete;
-    console.log(todoStatus, "BEFORE REVERSE");
+    let todoStatus = ipcRenderer.sendSync('get-list-by-id', listr.current.list.meta.listID).todos[todoID].meta.isComplete;
     todoStatus = !todoStatus;
-    console.log(todoID, todoStatus);
     ipcRenderer.send('complete-todo', listr.current.list.meta.listID, todoID, todoStatus);
   };
 
@@ -123,9 +146,23 @@ module.exports = function ListrRenderer(){
     listr.delegates.onClickListInSidebar(event, updatedListID, allLists);
   };
 
+  listr.delegates.softUpdateListrDashboard = function(event, updatedListID, allLists, todoID, completed){
+    console.log("SOFT UPDATE", todoID, completed);
+    listr.current.listrLists = allLists;
+    for(let index in allLists){
+      let list = allLists[index];
+      let numberOfTodos = Object.keys(list.todos).length;
+      let listDom = $("#"+list.meta.listID);
+      listDom.find(".badge").text(numberOfTodos);
+    }
+    listr.render.completeTodoTask(todoID, completed);
+    //listr.delegates.onClickListInSidebar(event, updatedListID, allLists);
+  };
+
   listr.bind = function(){
     ipcRenderer.on('page-data', listr.delegates.onPageData);
     ipcRenderer.on('refresh-list', listr.delegates.updateListrDashboard);
+    ipcRenderer.on('refresh-list-soft', listr.delegates.softUpdateListrDashboard);
     $(document).on('click', '#main-list .item', listr.delegates.onClickListInSidebar);
     $(document).on('click', '.add-todo', listr.delegates.onClickAddTodo);
     $(document).on('keydown', '.todo-input', listr.delegates.onEnterTodoUpdate);

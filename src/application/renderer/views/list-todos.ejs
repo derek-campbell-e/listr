@@ -1,6 +1,5 @@
 <%
   let checkmarkText = function(status){
-    console.log("CURRENT STATUS", status);
     status = status || false;
     let text = "check_box_outline_blank";
     if(status){
@@ -19,7 +18,7 @@
         for(let todoID in list.todos){
           let todo = list.todos[todoID];
       %>
-      <tr data-row-id='<%- todo.meta.id %>'>
+      <tr data-row-id='<%- todo.meta.id %>' class='todo-row todo-complete-<%-todo.meta.isComplete %>'>
         
         <td class='todo-checkbox-td'>
             <i class="material-icons todo-checkbox"><%- checkmarkText(todo.meta.isComplete) %></i>

@@ -6132,12 +6132,24 @@ body {
   transition: all 250ms ease-in-out; }
   .listr-lists .item:hover {
     background-color: rgba(0, 0, 0, 0.1); }
+  .listr-lists .item.active {
+    background-color: #5e85e3; }
+    .listr-lists .item.active:hover {
+      background-color: #4875df; }
+    .listr-lists .item.active .badge {
+      background-color: #fff;
+      color: #5e85e3; }
   .listr-lists .item i {
     font-size: 24px;
     line-height: 24px;
     float: left;
     margin-right: 12px; }
   .listr-lists .item .badge {
+    -webkit-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
     background-color: #5e85e3;
     float: right;
     line-height: 24px;
@@ -6164,6 +6176,16 @@ body {
 
 .todo-table td {
   border-top: 1px solid rgba(255, 255, 255, 0.06); }
+
+.todo-table .todo-complete-true td > *, .todo-table .todo-complete-false td > * {
+  -webkit-transition: all 250ms ease-in-out;
+  -moz-transition: all 250ms ease-in-out;
+  -ms-transition: all 250ms ease-in-out;
+  -o-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out; }
+
+.todo-table .todo-complete-true td > * {
+  opacity: 0.1; }
 
 .todo-checkbox, .todo-task p, .todo-drag {
   font-size: 24px;
