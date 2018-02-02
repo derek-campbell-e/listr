@@ -47,7 +47,6 @@ module.exports = function ListrApplication(Listr){
 
   application.delegates.getListByID = function(event, listID){
     let list = Listr.listByID(listID);
-    //console.log("GOT REQUEST", listID, list);
     event.returnValue = list;
     return event;
   };
@@ -67,7 +66,6 @@ module.exports = function ListrApplication(Listr){
   };
 
   application.delegates.completeTodo = function(event, listID, todoID, completed){
-    //console.log("COMPLETIN");
     if(typeof completed === "undefined"){
       completed = true;
     }
