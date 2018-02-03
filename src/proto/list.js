@@ -2,6 +2,7 @@ module.exports = function List(listName, category, listFile){
   listFile = listFile || {};
 
   const uuid = require('../common/uuid');
+  const _ = require('lodash');
 
   let list = {};
   let todo = require('./todo');
@@ -27,6 +28,7 @@ module.exports = function List(listName, category, listFile){
     let taskTiming = newTodo.calculateTiming(timing);
     let todoID = uuid();
     newTodo.meta.id = todoID;
+    newTodo.meta.sortOrder = list.showTodos().length + 1;
     list.todos[todoID] = newTodo.export();
     return todoID;
   };
@@ -83,7 +85,11 @@ module.exports = function List(listName, category, listFile){
         todos.push(todo);
       }
     }
-    return todos;
+    return list.sortTodos(todos);
+  };
+
+  list.sortTodos = function(todos){
+    return _.orderBy(todos, [function(todo){ console.log(todo.meta.sortOrder); return todo.meta.sortOrder; }], ['asc']);
   };
 
   list.completeTodo = function(todoID){

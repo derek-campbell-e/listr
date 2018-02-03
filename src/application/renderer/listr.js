@@ -1,6 +1,8 @@
 module.exports = function ListrRenderer(){
   window.$ = window.jQuery = require('jquery');
   const {ipcRenderer} = require('electron');
+  const {Draggable} = require('@shopify/draggable');
+  const {Sortable} = require('@shopify/draggable');
   let renderer = require('./renderer')();
 
   let listr = {};
@@ -23,6 +25,16 @@ module.exports = function ListrRenderer(){
     return text;
   };
 
+  listr.helpers.getSortOrder = function(){
+    let todoRows = $(".todo-table").find("tr");
+    let sortedIDs = [];
+    todoRows.each(function(i,e){
+      let todoID = $(e).attr('data-row-id');
+      sortedIDs.push(todoID);
+    });
+    return sortedIDs;
+  };
+
   listr.delegates = {};
   listr.delegates.onPageLoad = function(){
 
@@ -43,7 +55,8 @@ module.exports = function ListrRenderer(){
   };
 
   listr.render.todosPerList = function(list){
-    return renderer.render('list-todos', {list: list});
+    let sortedTodos = ipcRenderer.sendSync('show-sorted-todos', list.meta.listID);
+    return renderer.render('list-todos', {list: list, sortedTodos: sortedTodos});
   };
 
   listr.render.completeTodoTask = function(todoID, completed){
@@ -62,6 +75,20 @@ module.exports = function ListrRenderer(){
     let listTodosHTML = listr.render.todosPerList(list);
 
     contentPanel.html(listTodosHTML);
+    listr.dragging = new Sortable(
+      $(".todo-table tbody").get(0), 
+      {
+        draggable: 'tr', 
+        handle:'.todo-drag', 
+        appendTo: '.todo-table tbody',
+        mirror: {
+          xAxis: false,
+          constrainDimensions: true,
+        },
+      }
+    );
+    listr.dragging.on('sortable:start', () => console.log('drag:start'));
+    listr.dragging.on('sortable:stop', listr.delegates.onCompleteSorting);
   };
   
   listr.delegates.onClickAddTodo = function(){
@@ -133,6 +160,15 @@ module.exports = function ListrRenderer(){
     ipcRenderer.send('complete-todo', listr.current.list.meta.listID, todoID, todoStatus);
   };
 
+  listr.delegates.onCompleteSorting = function(event){
+    setTimeout(function(){
+      let listID = listr.current.list.meta.listID;
+      let sortOrder = listr.helpers.getSortOrder();
+      ipcRenderer.send('update-sort-order', listID, sortOrder);
+    }, 500);
+  
+  };
+
   listr.delegates.updateListrDashboard = function(event, updatedListID, allLists){
     let dom = $("#main-list");
     let html = "";
@@ -172,6 +208,7 @@ module.exports = function ListrRenderer(){
   let init = function(){
     ipcRenderer.send('page-load', 'index');
     listr.bind();
+    
     return listr;
   };
 

@@ -77,11 +77,26 @@ module.exports = function ListrApplication(Listr){
     return Listr.completeTodo(listID, todoID, completed, callback);
   };
 
+  application.delegates.updateSortOrder = function(event, listID, todoIDsSorted){
+    console.log("SORTING");
+    let callback = function(){
+      console.log(Listr.showLists()[0].todos);
+      event.sender.send('refresh-list', listID, Listr.showLists());
+    };
+    return Listr.updateSortOrder(listID, todoIDsSorted, callback);
+  };
+
+  application.delegates.showSortedTodos = function(event, listID){
+    event.returnValue = Listr.showSortedTodos(listID);
+  };
+
   ipcMain.on('page-load', application.delegates.onPageLoad);
   ipcMain.on('get-list-by-id', application.delegates.getListByID);
   ipcMain.on('add-todo', application.delegates.addTodo);
   ipcMain.on('update-todo', application.delegates.updateTodo);
   ipcMain.on('complete-todo', application.delegates.completeTodo);
+  ipcMain.on('update-sort-order', application.delegates.updateSortOrder);
+  ipcMain.on('show-sorted-todos', application.delegates.showSortedTodos);
 
 
   let mainWindow

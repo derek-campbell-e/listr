@@ -2,6 +2,7 @@ module.exports = function Todo(){
   let todo = {};
   todo.meta = {};
   todo.meta.isComplete = false;
+  todo.meta.sortOrder = 0;
 
   todo.task = null;
 

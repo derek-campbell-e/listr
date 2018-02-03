@@ -68,5 +68,31 @@ module.exports = function Listr(){
     return newList;
   };
 
+  listr.updateSortOrder = function(listID, todoIDsSorted, cb){
+   
+    let list = listr.listByID(listID);
+    if(!list){
+      return false;
+    }
+    
+    for(let sortIndex in todoIDsSorted){
+      let todoID = todoIDsSorted[sortIndex];
+      let todo = list.todoByID(todoID);
+      if(todo){
+        todo.meta.sortOrder = parseInt(sortIndex);
+      }
+    }
+    cb();
+    return true;
+  };
+
+  listr.showSortedTodos = function(listID){
+    let list = listr.listByID(listID);
+    if(!list){
+      return false;
+    }
+    return list.showTodos();
+  };
+
   return listr;
 };
