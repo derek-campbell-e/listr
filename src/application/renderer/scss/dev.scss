@@ -1,4 +1,5 @@
 @import "bootstrap/bootstrap";
+@import "animate";
 
 // colors 
 $blue: #5e85e3;
@@ -133,13 +134,18 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
   .todo-complete-true, .todo-complete-false {
-    td > * {
+    td {
+      overflow: hidden;
+    }
+    td > i, div {
       @include transition();
+      //@extend .animated;
     }
   }
   .todo-complete-true {
-    td > * {
+    td > i, div {
       opacity: 0.1;
+      //@extend .fadeOutRight;
     }
   }
 }
