@@ -147,6 +147,9 @@ body {
       opacity: 0.1;
       //@extend .fadeOutRight;
     }
+    .todo-input {
+      @extend .todo-strikeout;
+    }
   }
 }
 
@@ -236,4 +239,8 @@ tr.todo-insert {
 
 .draggable-mirror {
   width: 100%;
+}
+
+.todo-strikeout {
+  text-decoration: line-through;
 }

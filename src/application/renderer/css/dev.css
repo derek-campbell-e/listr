@@ -8759,3 +8759,6 @@ tr.todo-insert td {
 
 .draggable-mirror {
   width: 100%; }
+
+.todo-strikeout, .todo-table .todo-complete-true .todo-input {
+  text-decoration: line-through; }
