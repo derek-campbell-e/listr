@@ -13,28 +13,28 @@
 </div>
 <div class='content'>
   <div class='list-todos'>
-    <table class='todo-table'>
+    <ul class='list-group todo-table'>
       <%
         for(let todoIndex in sortedTodos){
           let todo = sortedTodos[todoIndex];
       %>
-      <tr data-row-id='<%- todo.meta.id %>' class='todo-row todo-complete-<%-todo.meta.isComplete %>'>
+      <li data-row-id='<%- todo.meta.id %>' class='list-item todo-row todo-complete-<%-todo.meta.isComplete %>'>
         
-        <td class='todo-checkbox-td'>
+        <div class='todo-checkbox-td'>
             <i class="material-icons todo-checkbox"><%- checkmarkText(todo.meta.isComplete) %></i>
-          </td>
-        <td class="todo-task" id='<%- todo.meta.id %>'>
+        </div>
+        <div class="todo-task" id='<%- todo.meta.id %>'>
           <div>
             <input type='text' class='todo-input' value='<%- todo.task %>'>
           </div>
-        </td>
-        <td class='todo-drag-td' data-sort-order='<%- todo.meta.sortOrder %>'>
+        </div>
+        <div class='todo-drag-td' data-sort-order='<%- todo.meta.sortOrder %>'>
           <i class="material-icons todo-drag draggable-source">drag_handle</i>
-        </td>
-      </tr>
+        </div>
+      </li>
       <%
         }
       %>
-    </table>
+      </ul>
   </div> 
 </div>

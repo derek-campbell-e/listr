@@ -27,7 +27,7 @@ module.exports = function ListrRenderer(){
   };
 
   listr.helpers.getSortOrder = function(){
-    let todoRows = $(".todo-table").find("tr");
+    let todoRows = $(".todo-table").find("li");
     let sortedIDs = [];
     todoRows.each(function(i,e){
       let todoID = $(e).attr('data-row-id');
@@ -82,11 +82,11 @@ module.exports = function ListrRenderer(){
 
     contentPanel.html(listTodosHTML);
     listr.dragging = new Sortable(
-      $(".todo-table tbody").get(0), 
+      $(".todo-table").get(0), 
       {
-        draggable: 'tr', 
+        draggable: 'li', 
         handle:'.todo-drag', 
-        appendTo: '.todo-table tbody',
+        appendTo: '.todo-table',
         mirror: {
           xAxis: false,
           constrainDimensions: true,

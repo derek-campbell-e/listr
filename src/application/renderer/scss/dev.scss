@@ -153,6 +153,19 @@ body {
   }
 }
 
+.todo-row {
+  @extend .list-group-item;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+  border: 0;
+}
+
+.todo-task {
+  flex: 1;
+}
+
 .todo-checkbox, .todo-task p, .todo-drag {
   font-size: 24px;
   line-height: 24px;
