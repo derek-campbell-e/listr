@@ -1,0 +1,37 @@
+<%
+  let formatDate = function(dateObject){
+    let html = "";
+    let classes = [];
+    if(!dateObject.isCurrentMonth){
+      classes.push('inactive');
+    }
+    if(dateObject.isToday){
+      classes.push('today');
+    }
+    let classString = classes.join(" ");
+    html = "<span class='date days "+classString+"'>"+dateObject.moment.format('D')+"</span>";
+    return html;
+  };
+%>
+
+<table class='table date-table'>
+  <thead>
+    <tr>
+      <th id='date-back'><span class='date'>&lt;</span></th>
+      <th colspan=5 id='date-display'><span class='date'><%- referenceMoment.format("MMMM YYYY"); %></span></th>
+      <th id='date-forward'><span class='date'>&gt;</span></th>
+    </tr>
+  </thead>
+  <% for(let calendarIndex in calendar){ 
+    calendarIndex = parseInt(calendarIndex);
+    let dateObject = calendar[calendarIndex];
+  %>
+    <% if (calendarIndex % 7 === 1 || calendarIndex === 0) { %>
+      <tr>
+    <% } %>
+    <td><%- formatDate(dateObject); %></td>
+    <% if (calendarIndex % 7 === 0 && calendarIndex !== 0) { %>
+      </tr>
+    <% } %>
+  <% } %>
+</table>

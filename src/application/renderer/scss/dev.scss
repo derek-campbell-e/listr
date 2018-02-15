@@ -244,3 +244,42 @@ tr.todo-insert {
 .todo-strikeout {
   text-decoration: line-through;
 }
+
+.date {
+  font-size: 8pt;
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  &.today {
+    background-color: $blue;
+    color: #fff;
+  }
+  &.inactive {
+    opacity: 0.5;
+  }
+}
+
+.date-table td, .date-table th {
+  padding: 0;
+  border: 0px;
+  border-bottom:  0!important;
+  text-align: center;
+  font-size: 8pt;
+}
+#date-display {
+  .date {
+    width: auto;
+  }
+}
+#date-back, #date-forward {
+  .date {
+    &:hover, &:focus {
+      background-color: $blue;
+      color: #fff;
+    }
+  }
+}

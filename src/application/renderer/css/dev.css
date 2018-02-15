@@ -8762,3 +8762,32 @@ tr.todo-insert td {
 
 .todo-strikeout, .todo-table .todo-complete-true .todo-input {
   text-decoration: line-through; }
+
+.date {
+  font-size: 8pt;
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50%;
+  cursor: pointer; }
+  .date.today {
+    background-color: #5e85e3;
+    color: #fff; }
+  .date.inactive {
+    opacity: 0.5; }
+
+.date-table td, .date-table th {
+  padding: 0;
+  border: 0px;
+  border-bottom: 0 !important;
+  text-align: center;
+  font-size: 8pt; }
+
+#date-display .date {
+  width: auto; }
+
+#date-back .date:hover, #date-back .date:focus, #date-forward .date:hover, #date-forward .date:focus {
+  background-color: #5e85e3;
+  color: #fff; }

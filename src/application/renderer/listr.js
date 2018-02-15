@@ -4,6 +4,7 @@ module.exports = function ListrRenderer(){
   const {Draggable} = require('@shopify/draggable');
   const {Sortable} = require('@shopify/draggable');
   let renderer = require('./renderer')();
+  const calendar = require('./js/calendar');
 
   let listr = {};
 
@@ -45,6 +46,11 @@ module.exports = function ListrRenderer(){
   };
 
   listr.render = {};
+
+  listr.render.calendar = function(){
+    let dom = $("#calendar");
+    calendar(dom);
+  };
 
   listr.render.insertTodo = function(){
     return renderer.render('new-todo');
@@ -208,6 +214,7 @@ module.exports = function ListrRenderer(){
   let init = function(){
     ipcRenderer.send('page-load', 'index');
     listr.bind();
+    listr.render.calendar();
     
     return listr;
   };
